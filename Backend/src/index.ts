@@ -1,13 +1,13 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import authRouter from "../src/routes/AuthRoutes";
-import productoRouter from "../src/routes/ProductoRoutes";
-import movimientoRouter from "../src/routes/MovimientoRoutes";
-import dashboardRouter from "../src/routes/DashboardRoutes";
+import authRouter from "./routes/AuthRoutes";
+import productoRouter from "./routes/ProductoRoutes";
+import movimientoRouter from "./routes/MovimientoRoutes";
+import dashboardRouter from "./routes/DashboardRoutes";
 import { Request , Response } from "express";
 import { pool } from "./config/db";
-import categoriasRouter from "../src/routes/CategoriaRoutes";
+import categoriasRouter from "./routes/CategoriaRoutes";
 import { errorMiddleware } from "./middlewares/errorMiddleware";
 
 dotenv.config();
