@@ -9,12 +9,14 @@ import { Request , Response } from "express";
 import { pool } from "./config/db";
 import categoriasRouter from "./routes/CategoriaRoutes";
 import { errorMiddleware } from "./middlewares/errorMiddleware";
+import { testDBConnection } from "./config/db";
 
 dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+const PORT = process.env.PORT;
 
 app.use("/api/auth" , authRouter);
 app.use("/api/productos" , productoRouter);
@@ -37,6 +39,15 @@ app.get("/api/empresas/" , async (req : Request , res : Response) => {
 
 app.use(errorMiddleware);
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log("Servidor iniciado en puerto 3000");
-});
+
+(async () => {
+  const ok = await testDBConnection();
+  if (!ok) {
+    console.error("No se pudo conectar a la DB, saliendo...");
+    process.exit(1); // Railway mostrará el error en logs y no dará 502
+  }
+
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+})();
