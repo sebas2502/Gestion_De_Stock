@@ -10,7 +10,11 @@ export class AuthService {
   constructor(private usuarioRepo: UsuarioRepository) {}
   
   async login(nombre_empresa: string, email: string, password: string) {
- 
+    console.log("LOGIN PARAMS:", {
+    nombre_empresa,
+    email,
+    password: password ? "***" : "EMPTY"
+});
    if (!nombre_empresa?.trim()) {
     throw new Error("Debe ingresar una empresa válida");
    }
