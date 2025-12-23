@@ -8,7 +8,9 @@ const authService = new AuthService(usuarioRepo);
 
 export class AuthController {
   static async login(req: Request, res: Response) {
+   
     try {
+      console.log("Login body:", req.body);
       const { nombre_empresa, email, password } = req.body;
       const data = await authService.login(nombre_empresa, email, password);
       res.json(data);
