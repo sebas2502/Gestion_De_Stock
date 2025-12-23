@@ -8,11 +8,13 @@ import { AppError } from "../errors/AppError";
 
 export class AuthService {
   constructor(private usuarioRepo: UsuarioRepository) {}
-
+  
   async login(nombre_empresa: string, email: string, password: string) {
  
-   
-    const [row] = await pool.query<RowDataPacket[]>("SELECT * FROM empresas WHERE nombre = ?" , [nombre_empresa]);
+   if (!nombre_empresa?.trim()) {
+    throw new Error("Debe ingresar una empresa válida");
+   }
+    const [row] = await pool.query<RowDataPacket[]>("SELECT * FROM empresas WHERE LOWER(nombre) = LOWER(?)" , [nombre_empresa]);
     const empresa = row[0];
     if(!empresa){
       throw new Error("La empresa ingresada no existe!")
