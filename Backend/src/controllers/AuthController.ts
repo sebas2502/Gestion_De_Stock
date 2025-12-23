@@ -13,7 +13,8 @@ export class AuthController {
       const data = await authService.login(nombre_empresa, email, password);
       res.json(data);
     } catch (err: any) {
-      res.status(400).json({ error: err.message });
+      console.error("LOGIN ERROR: ",err.message);
+      res.status(400).json({ message: err.message });
     }
   }
 
