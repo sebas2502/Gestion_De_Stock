@@ -10,6 +10,6 @@ export const logout = () => {
   });
 
   setTimeout(() => {
-    window.location.href = "/login";
+    window.location.href = "auth/login";
   }, 800);
 };
