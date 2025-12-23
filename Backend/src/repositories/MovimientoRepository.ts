@@ -46,7 +46,7 @@ export class MovimientosRepository {
   }
 
 
-   async obtenerTodos(empresa_id: number) {
+ async obtenerTodos(empresa_id: number) {
   const [rows] = await this.db.query(
     `
     SELECT 
@@ -64,8 +64,8 @@ export class MovimientosRepository {
       u.nombre AS usuario_nombre
 
     FROM movimientos_stock m
-    JOIN productos p ON p.id = m.producto_id
-    JOIN usuarios u ON u.id = m.usuario_id
+    LEFT JOIN productos p ON p.id = m.producto_id
+    LEFT JOIN usuarios u ON u.id = m.usuario_id
     WHERE m.empresa_id = ?
     ORDER BY m.fecha DESC
     `,
@@ -74,6 +74,7 @@ export class MovimientosRepository {
 
   return rows;
 }
+
 async buscar(empresa_id?: number, desde?: string, hasta?: string) {
     let sql = `
       SELECT m.*, 
