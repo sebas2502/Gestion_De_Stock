@@ -14,7 +14,10 @@ import { testDBConnection } from "./config/db";
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "https://gestiondestocksw.netlify.app", 
+  credentials: true
+}));
 app.use(express.json());
 const PORT = process.env.PORT;
 
