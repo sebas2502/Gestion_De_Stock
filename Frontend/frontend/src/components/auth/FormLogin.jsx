@@ -48,6 +48,8 @@ export default function FormLogin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("API URL:", import.meta.env.VITE_API_URL);
+
     setError("");
     setLoading(true);
 
